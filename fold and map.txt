@@ -1,0 +1,23 @@
+#fold function
+(define (step x y) (+ y 1))
+(define (mystery L) (fold step 0 L))
+
+(mystery'("ab"), "bd "cd")
+
+(step "ab" (mystery '('bd 'cd')))
+(step "ab" (step 'bd (mystery '('cd'))))
+(step 'ab' (step "bd" (step 'cd' mystery'())))
+
+#map definition
+(define (mymap2 g L) (fold ?f '()L))
+(define (mymap2 g L) (fold (lambda (carL recursionRes)(cons (g carL) recursionRes) ) '() L))
+
+#filter higher order function
+(define (gt1 x ) (> x 1 ))
+(define (filter pred L ) (cond 
+							((null? L '())
+							((pred (car L)) (cons (car L) (filter pred (cdr L))))
+							(else (filter pred (cdr L )))
+							)
+						)
+)

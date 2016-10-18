@@ -1,0 +1,218 @@
+
+<!-- saved from url=(0076)http://www.eecs.wsu.edu/~arslanay/CptS355/assignments/Scheme_Assignment.html -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=windows-1252"> 
+	   <title>CptS 355 - Assignment 3 - Scheme</title>
+       <link rel="stylesheet" type="text/css" href="./CptS 355 - Assignment 3 - Scheme_files/styles.css">
+<style type="text/css">
+:root #content > #right > .dose > .dosesingle,
+:root #content > #center > .dose > .dosesingle
+{ display: none !important; }</style></head>
+<body>
+
+<div id="page" style="width: 1200px; height: 2024px">
+
+<h1>CptS355 - Assignment 3 (Scheme)</h1>
+<h2>Cpts 355 - Spring 2016</h2>
+<h2>Scheme Functions</h2>
+
+<b>Assigned: Wednesday October 5, 2016</b>
+<p></p>
+<b>Due:      Wednesday October 17, 2016</b>
+<p>
+<b>Weight:</b> Assignment 3 will count for 5% of your course grade. 
+</p>
+
+<b>This assignment is to be your own work. Refer to the course academic integrity statement in the syllabus.</b>
+
+<p>
+This homework provides some practice in Scheme programming.  
+The Racket environment, which can be downloaded from <a href="http://racket-lang.org/">http://racket-lang.org</a> is friendly scheme implementation. It 
+can be installed on most operating systems (e.g., Mac, Linux, Unix, Windows). On Windows, get the installer from the 
+racket-lang website. For linux systems you can probably find a racket package in your distribution's package manager. After installing
+use the <code>drracket</code> command to start up the IDE.
+Be sure to select R5RS as the language on the language
+menu. You should only have to do this once after installing.
+</p><p>
+You can edit your code in the upper panel of the Racket IDE and save it from there. Or edit in
+any text editor and load it into Racket.
+
+</p><h2>Turning in your assignment</h2>
+<p>
+Turn in a plain text file named <b>HW3.scm</b> containing legal scheme code -- you should be able to take the contents of your file and run it through racket without errors. Create your own test cases for each function: you may include the test 
+cases in what you turn in.
+To submit your assignment, turn in your file by uploading on the Assignment3 (Scheme) DROPBOX on Blackboard (under AssignmentSubmisions menu). 
+
+Be sure to include your name as a comment at the top of the file. You may turn in your assignment up to 5 times. Only the last one submitted will be graded. Please let the instructor know if you need to resubmit it a 6th time. 
+</p>
+<p>
+The work you turn in is to be <b>your own personal work</b>. You may <b>not</b> copy another 
+student's code or work together on writing code.
+You may not copy code from the web, or anything else that lets you avoid solving
+the problems for yourself. 
+</p>
+<h2>Grading</h2>
+<p>The assignment will be marked for correctness and effective programming. You will lose points if you don't (1) provide test functions, (2) explain your code with appropriate comments, and (3) follow a good programming style.  
+</p>
+
+<h2>General rules</h2>
+<p>Unless directed otherwise, you should implement your functions using
+recursive definitions that you build up from the basic
+built-in functions such as <code>cons, car, cdr, list, </code>etc.
+</p><p>
+Don't use set! and don't <code>define</code> anything except functions. 
+</p>
+
+<h2>Problems</h2>
+
+<h3>1. (deepCount L) (15%)</h3> 
+<p>The function <code>deepCount</code> takes a single argument, L, a list, and returns how many elements (atoms) are contained in L and the sublists in L. </p>
+<p>Example:</p>
+<pre> <span>(deepCount '(1 (2 3 4) (5) 6 7 (8 9) "10" 11)) </span>=&gt; 11 </pre>
+
+<p>(Note: The lenght function covered in class calculated a shallow count of elements (i.e., only number of elements in L without looking into sublists). deepCount should also look into sublists and count the elements in each sublist.)</p>
+
+<p>(HINT: The predicate function <code>(pair? L)</code> return true if L is a pair value (such as a list))</p>
+
+<br>
+
+<h3>2. (nthElement n L)  (10%)</h3> 
+<p>The function <code>nthElement</code> takes an index value n and a list L and returns  the nth element of the list L (0-based indexing). Assume that the
+index, n, is at least 0 and smaller than the length of the list. ( i.e., you do not have to worry about error cases such as when n is negative or too large.)</p>
+<p>Example:</p>
+<pre><span> (nthElement 3 '(1 2 3 4 (5) "6"))</span> =&gt; 4 
+ <span>(nthElement 4 '(1 2 3 4 (5) "6"))</span> =&gt; (5) </pre>
+
+<p>(HINT: The trick with problems like this is to reduce both the size of the list and the size of the
+integer argument in recursive calls. The 3rd element of a list is the 2nd element of the cdr of
+the list.)</p>
+<br>
+
+<h3>3. (repL n v L)  (10%)</h3> 
+<p>The function <code>repL</code> takes an index value n, a value v, and a list L and returns  a (new) list which is the same as L, except that the nth element is v. 
+Again assume 0-based indexing. Assume that the index, n, is at least 0 and smaller than the length of the list. </p>
+<p>Example:</p>
+<pre><span> (repL 3  40 '(1 2 3 4 (5) "6"))</span> =&gt; (1 2 3 40 (5) "6") 
+ <span>(repL 4  5 '(1 2 3 4 (5) "6"))</span> =&gt; (1 2 3 4 5 "6") </pre>
+<br>
+
+<h3>4. (range min step max) (15%)</h3> 
+<p>The function <code>range</code> takes a starting index <code>min</code>, a step value <code>step</code>, and a max index <code>max</code> and returns
+a list of integers <code>(min min+step min+step+step ... max+k*step)</code>, where <code>k</code> is the largest integer such that <code> min+k*step&lt;max</code> and <code>min+(k+1)*step&gt;max</code>.
+If min &#8805; max and step &#8805; 0  OR min&lt;max and step&lt;0 , return the empty list. </p>
+<p>Example:</p>
+<pre><span> (range 0  5 30)</span> =&gt; (0 5 10 15 20 25) 
+ <span>(range 5  -1 0)</span> =&gt; (5 4 3 2 1)</pre>
+ <br>
+ 
+ <h3>5. (merge2 L1 L2) (10%)</h3> 
+<p>The function <code>merge2</code> takes two lists of integers, <code>L1</code> and <code>L2</code>, each already in ascending order, and returns a merged list that is also in ascending order.  
+The length of the new list is the sum of the lengths of the original lists. </p>
+<p>Examples:</p>
+<pre><span> (merge2 '(4 6 7) '(3 5 7))</span> =&gt; (3 4 5 6 7 7) 
+ <span>(merge2 '(1 7) '(2 5 7))</span> =&gt; (1 2 5 7 7)
+ <span>(merge2 '() '(3 5 7))</span> =&gt; (3 5 7)</pre>
+ <br>
+ 
+<h3> (fold L) </h3>
+<p>Just use the definition given in class. You'll need it for the function below.</p>
+ <br>
+ 
+<h3>6. (mergeN Ln)  (15%)</h3> 
+<p>Using <code>merge2</code> function  defined above and the <code>fold</code> function, define <code>mergeN</code> which takes a list of lists, each already in ascending order,
+and returns a new list containing all of the elements in ascending order. </p>
+
+<p>(Provide an answer using fold; without using recursion).</p>
+<p>Example:</p>
+<pre><span> (mergeN '())</span> =&gt; () 
+ <span>(mergeN '((2 4 6) (1 4 5 6)))</span> =&gt; (1 2 4 4 5 6 6) 
+ <span>(mergeN '((2 4 6 10) (1 3 6) (8 9)))</span> =&gt; (1 2 3 4 6 6 8 9 10) </pre>
+
+<p> Note that this requires making sure that your understanding of fold encompasses seeing that it
+can return a list, not just a simple value; but the solution is, in fact, a 
+very simple use of fold once you choose the right value for the base case corresponding
+to the empty list as input.</p>
+<p>In a comment, discuss the question of how many cons operations your function uses
+to produce its result, in terms of the sizes of the input lists. Explain your answer.  
+For this problem, I suggest looking first at how many cons operations are used
+by merge2 for lists of length len1 and len2. If mergeN is used for a single list, what is the answer?
+For 2 lists? For n lists?   </p>
+ <br>
+ 
+<h3>7. (matrixMap f M) (10%)</h3> 
+<p> A matrix M can be represnted in Scheme as a list of lists, for example   M=<code>'((1 2) (3 4)) </code>   </p><p>
+Without using recursion, write a function <code>matrixMap</code>, which takes a function <code>f</code> and a matrix <code>M</code> as arguments and returns a matrix consisting of <code>f</code> applied to the elements of M.
+ </p>
+<p>Example:</p>
+<pre><span> (matrixMap (lambda (x) (* x x))  '((1 2) (3 4)) )</span> =&gt; ((1 4) (9 16)) 
+ <span>(matrixMap (lambda (x) (+ 1 x))  '((0 1 2) (3 4 5)) )</span> =&gt; ((1 2 3) (4 5 6)) </pre>
+ <br>
+
+<h3>8. (avgOdd L) (15%)</h3> 
+<p> Using the function fold and without using recursion, write a function <code>avgOdd</code> which takes a list L and returns the average of the <b>odd</b> values in L. 
+ </p>
+<p>Example:</p>
+<pre><span> (avgOdd '(1 2 3 4 5))</span> =&gt; 3 
+ </pre>
+ <p>Use <code>(odd? n)</code> and  <code>(even? n)</code>  predicate functions to check if a given  number <code>n</code> is odd or even. </p>
+
+ <br>
+
+
+<!--- 
+<h3> (zip L1 L2) </h3>
+<p>In class we defined a function named zip that takes two lists as its arguments and 
+produces a list of pairs as its output.  Just use the definition given in class. You'll need it for the function below.</p>
+ 
+
+<h3>(zipN Ln)</h3>
+<p>Using <code>zip</code> and the <code>fold</code> functions defined above define zipN which takes a list containing n sublists, <code>L1...Ln</code>, and returns a new list of lists where each <code>sublist i</code> zips the <code>i</code>th element from each sublist <code>L1..Ln</code>.
+If one of the sublists in the input list is shorter than others, the elements in longer lists should be truncated. </p>
+
+<p>(Provide an answer using fold; without using recursion).</p>
+<p>Example:</p>
+<pre><span> (zipN '())</span> => ()</span> 
+ <span>(zipN '((2 4 6) (1 4 5 6)))</span> => ((2 1) (4 4) (6 5)) </span>
+ <span>(zipN '((2 4 6) (1 4 5 6) (8 9)))</span> => ((2 1 8) (4 4 9)) </pre>
+ <br>
+<p> Note that this requires making sure that your understanding of fold encompasses seeing that it
+can return a list, not just a simple value; but the solution is, in fact, a 
+very simple use of fold once you choose the right value for the base case corresponding
+to the empty list as input.</p>
+<p>In a comment, discuss the question of how many cons operations your function uses
+to produce its result, in terms of the sizes of the input lists. By "discuss the question"
+I mean not only to give an answer but also to give an argument as to how the answer is 
+arrived at. For this problem, I suggest looking first at how many cons operations are used
+by <code>zip</code> for lists of length len1 and len2. If <code>zipN</code> is used for a single list, what is the answer?
+For 2 lists? For n lists?  </p>
+
+
+
+<pre>
+&gt; (zipN '())
+()
+&gt; (mergeN '((2 4 6) (1 4 5)))
+(1 2 4 4 5 6)
+&gt; (mergeN '((2 4 5) (1 4 6) (3 7 9)))
+(1 2 3 4 4 5 6 7 9)
+</pre>
+Note that this requires making sure that your understanding of fold encompasses seeing that it
+can return a list, not just a simple value; but the solution is, in fact, a 
+very simple use of fold once you choose the right value for the base case corresponding
+to the empty list as input.
+<P>
+In a comment, discuss the question of how many cons operations your function uses
+to produce its result, in terms of the sizes of the input lists. By "discuss the question"
+I mean not only to give an answer but also to give an argument as to how the answer is 
+arrived at. For this problem, I suggest looking first at how many cons operations are used
+by merge2 for lists of length len1 and len2. If mergeN is used for a single list, what is the answer?
+For 2 lists? For n lists?  
+
+--->
+<br>
+<br>
+
+
+<br>
+</div>
+
+</body></html>

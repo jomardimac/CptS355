@@ -1,0 +1,74 @@
+Poly/ML 5.6 Release
+> 3;
+val it = 3: int
+> 3.0
+# 
+# ;
+val it = 3.0: real
+> val x = it
+# ;
+val x = 3.0: real
+> val x = 3+4;
+val x = 7: int
+> "ab";
+val it = "ab": string
+> val it = "ab": string
+# ;
+val it = "ab": string
+> val it = true: bool
+# ;
+val it = true: bool
+> false;
+val it = false: bool
+> true;
+val it = true: bool
+> ~1
+# ;
+val it = ~1: int
+> 2-3
+# ;
+val it = ~1: int
+> (3,4);
+val it = (3, 4): int * int
+> (1,2,3);
+val it = (1, 2, 3): int * int * int
+> ();
+val it = (): unit
+> (1,);
+poly: : error: Expression expected but ) was found
+Static Errors
+> (3);
+val it = 3: int
+> [1,2,3]
+# ;
+val it = [1, 2, 3]: int list
+> {1,2}
+poly: : error: = expected but , was found
+poly: : error: Expression expected but , was found
+poly: : error: = expected but } was found
+poly: : error: Expression expected but } was found
+# {1,2};
+poly: : error: = expected but , was found
+poly: : error: Expression expected but , was found
+poly: : error: = expected but } was found
+poly: : error: Expression expected but } was found
+Static Errors
+> [true, false, true]
+# ;
+val it = [true, false, true]: bool list
+> #can't mix and match
+poly: : error: ; expected but and was found
+Static Errors
+> [[1,2],[3,4]]
+# ;
+val it = [[1, 2], [3, 4]]: int list list
+> 
+> [1,[1,2]];
+poly: : error: Elements in a list have different types.
+   Item 1: 1 : int
+   Item 2: [1, 2] : int list
+   Reason:
+      Can't unify int (*In Basis*) with int list (*In Basis*)
+         (Different type constructors)
+Found near [1, [1, 2]]
+Static Errors

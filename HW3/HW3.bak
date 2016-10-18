@@ -1,0 +1,8 @@
+(define (deepCount L)
+  (cond ; start with a conditions:
+    ((null? L) 0) ;if L is empty or not a list, return 0
+    ( (pair? (car L)) ( + (deepCount(car L)) (deepCount (cdr L)))) ;if the element is a list, go through the list and run the function recursively
+    (else ( + 1 (deepCount(cdr L)))) ;otherwise: add 1 to the count for one element: cdr
+    )
+  )
+
