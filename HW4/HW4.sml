@@ -41,12 +41,22 @@ fun union (L1, []) = L1 (*base case: return the list when theres no more in the 
 
 	
 (*list difference*)
-fun listDiff [] L2 = []
+fun remove x [] = []
+	| remove x (y::rest) = if x = y then remove (x rest)
+	else y::(remove (x rest));
+
+fun listDiff [] y = y
+	| listDiff x [] = x
+	| listDiff (x::r1) (y::r2) = if (exists (x, (y::r2))) then (listDiff r1 r2)
+	else x::(listDiff r1 (remove y (y::r2)));
 
 
 (*pairNright and helper functions*)
-fun pairAux N [] acc = [acc]
+fun length [] = 0
+	| length (x::rest) = length (rest) + 1;
 	
+fun pairAuxR N [] acc = [acc]
+	| pairAuxR N (x::rest) acc = if (N > length (x::rest)) then 
 	
 	
 (*merge sort helper unit lists*)
