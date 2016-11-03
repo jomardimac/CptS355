@@ -1,7 +1,7 @@
 (*Name: Jomar Dimaculangan*)
 (*HW4*)
 
-(*use "C:\\Users\\Jomar\\Documents\\CptS 355\\CptS355\\HW4\\HW4.sml";*)
+(*use "C:\\Users\\Jomar\\Documents\\CptS355\\HW4\\HW4.sml";*)
 
 (* revAppend, reverse, aux_filter and filter will be #1 question of HW4 *);
 
@@ -149,16 +149,50 @@ fun mergeSort2 [] =[]
 	
 (* TEST FUNCTIONS *)
 
-fun myTest_filter(pred,L,R) = if (myfilter pred L) = R then true else false;
-fun myTest_subset(L, R) = if (subsets L) = R then true else false;
-fun myTest_pairNleft(n,L,R) = if (pairNleft n L) = R then true else false;
-fun myTest_pairNright (n,L,R) = if (pairNright n L) = R then true else false;
-fun myTest_exists(n,L,R) = if (exists(n,L) = R) then true else false;
-fun myTest_listUnion(L,L2,R) = if (listUnion(L,L2) = R) then true else false;
-fun myTest_listDiff(L,L2,R) = if (listDiff L L2 = R) then true else false;
-fun myTest_mergeSort(L,L2,R) = if (mergeSort L L2 = R) then true else false;
-fun myTest_mergeSort2(L,L2,R) = if (mergeSort2 L L2 = R) then true else false;	
+fun testfilter(pred,L,R) = if (filter pred L) = R then true else false;
+fun testsubsets(L, R) = if (subsets L) = R then true else false;
+fun testpairNleft(n,L,R) = if (pairNleft n L) = R then true else false;
+fun testpairNright (n,L,R) = if (pairNright n L) = R then true else false;
+fun testexists(n,L,R) = if (exists(n,L) = R) then true else false;
+fun testlistUnion(L,L2,R) = if (listUnion(L,L2) = R) then true else false;
+fun testlistDiff(L,L2,R) = if (listDiff L L2 = R) then true else false;
+fun testmergeSort(L,R) = if (mergeSort L = R) then true else false;
+fun testmergeSort2(L,R) = if (mergeSort2 L = R) then true else false;	
 
+val resultfilter1 = testfilter ((fn x => (x=1)),[1,2,3],  [1]);
+val resultfilter2 = testfilter ((fn x => (x <= 3)), [1,2,3,4] , [1,2,3]);
+val resultfilter3 = testfilter ((fn x => (x > 2)), [1,1,2,3,4,5], [3, 4, 5] );
 
+val resultsubsets1 = testsubsets ([1,2] , [[], [2], [1], [2, 1]]);
+val resultsubsets2 = testsubsets ([1,2,3] , [[], [3], [2], [3, 2], [1], [3, 1], [2, 1], [3, 2, 1]]);
+val resultsubsets3 = testsubsets ([2,3,9] , [[], [9], [3], [9, 3], [2], [9, 2], [3, 2], [9, 3, 2]]);
 
-	
+val resultpairNleft1 = testpairNleft (2, [1,2,3,4,5], [[1], [2, 3], [4, 5]]);
+val resultpairNleft2 = testpairNleft (3, [1,2,3,4,5,6,7], [[1], [2, 3, 4], [5, 6, 7]]);
+val resultpairNleft3 = testpairNleft (4, [1,2,3,4,5,6,7,9,1,2,34,51,52,1,32], [[1, 2, 3], [4, 5, 6, 7], [9, 1, 2, 34], [51, 52, 1, 32]]);
+
+val resultpairNright1= testpairNright (2, [1,2,3,4,5], [[1, 2], [3, 4], [5]]);
+val resultpairNright2 = testpairNright (3, [1,2,3,4,5,6,7], [[1, 2, 3], [4, 5, 6], [7]]);
+val resultpairNright3 = testpairNright (4, [1,2,3,4,5,6,7,9,1,2,34,51,52,1,32], [[1, 2, 3, 4], [5, 6, 7, 9], [1, 2, 34, 51], [32, 1, 52]]);
+
+val resultexists1 = testexists (1,[], false);
+val resultexists2 = testexists (3, [1,2,3], true);
+val resultexists3 = testexists ([1] , [[1,2,3,4]], false);
+val resultexists4 = testexists ([1], [[1],[2],[3]], true );
+
+val resultlistUnion1 = testlistUnion([1], [2,3,45,1], [2, 3, 45, 1]);
+val resultlistUnion2 = testlistUnion([1], [1], [1]);
+val resultlistUnion3 = testlistUnion ([[2,3],[1,2]], [[1],[2,3]], [[1],[2,3],[1,2]]);
+
+val resultlistDiff1 = testlistDiff([1], [1], []);
+val resultlistDiff2 = testlistDiff([1,2,3], [1,2], [3]);
+val resultlistDiff3 = testlistDiff([[2,3],[1,2],[2,3]], [[1],[2,3]], [[1,2],[2,3]]);
+
+val result1MergeSort =  testmergeSort ([5,3,6,3,1,7,2,4,1], [1,1,2,3,3,4,5,6,7] );
+val result2MergeSort = testmergeSort ([1,1,1,1,3,12,3,15,15,8], [1, 1, 1, 1, 3, 3, 8, 12, 15, 15]);
+val result3MergeSort = testmergeSort ([9,8,7,7,6,5,4,2,3,1], [1, 2, 3, 4, 5, 6, 7, 7, 8, 9]);
+
+val result1MergeSort2 =  testmergeSort2 ([5,3,6,3,1,7,2,4,1], [1, 2, 3, 4, 5, 6, 7] );
+val result2MergeSort2 =  testmergeSort2 ([1,1,1,1,3,12,3,15,15,8], [1, 3, 8, 12, 15] );
+val result3MergeSort2 = testmergeSort2 ([9,8,7,7,6,5,4,2,3,1], [1, 2, 3, 4, 5, 6, 7, 8, 9]);
+
