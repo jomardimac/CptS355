@@ -42,7 +42,7 @@ let
 end;
 
 (*exist: *);
-(*The type of exist is (''a * ''a list )->bool and not ('a * 'a list)-> bool because *)
+(*The type of exist is (''a * ''a list )->bool and not ('a * 'a list)-> bool because exist is doing a COMPARISON and not simply putting a value *)
 fun exists (L,[]) = false (*if the second list is done, the element doesn't exists*)
 	| exists (x,y::resty) = if x = y then true  (* compare the first elements of the list, if they match, it does exist*)
 						else exists (x,resty); (*go through the list recursively*)
@@ -143,9 +143,14 @@ fun mergeSort2 [] =[]
 	
 	
 	
+(*#8 Practice with Datatypes*)
+(*Create a datatype with a string and an int*)
+datatype either = ImAString of string | ImAnInt of int;
+(*Create a Tree with values of either and a node *)
+datatype eitherTree = INTERIOR of either | NODE of (either * either); 
+(* search *)
 
-	
-
+(*fun eitherSearch INTERIOR *)
 	
 (* TEST FUNCTIONS *)
 
